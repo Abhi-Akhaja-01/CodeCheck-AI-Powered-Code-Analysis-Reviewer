@@ -1,0 +1,221 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@theme {
+  --color-primary: #6366f1; /* indigo-500 */
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-glow: rgba(99, 102, 241, 0.4);
+  
+  --color-secondary: #3b82f6; /* blue-500 */
+  --color-secondary-300: #93c5fd;
+  --color-secondary-400: #60a5fa;
+  --color-secondary-glow: rgba(59, 130, 246, 0.4);
+  
+  --color-accent: #f43f5e; /* rose-500 */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  --animate-pulse-glow: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px var(--color-primary-glow)); }
+    50% { opacity: 0.6; filter: drop-shadow(0 0 20px var(--color-primary-glow)); }
+  }
+}
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-panel: #ffffff;
+  --bg-header: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --code-bg: #f1f5f9;
+  color-scheme: light;
+}
+
+.dark {
+  --bg-main: #0a0b10;
+  --bg-panel: #0f1423;
+  --bg-header: #151b2b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --code-bg: #0b0f19;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.panel-header {
+  background-color: var(--bg-header);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-main);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--text-muted);
+  border-radius: 9999px;
+}
+
+/* Monaco Editor Overrides */
+.monaco-editor, .monaco-editor-background, .monaco-editor .inputarea.ime-input {
+  background-color: transparent !important;
+}
+
+.monaco-editor .margin {
+  background-color: transparent !important;
+}
+
+/* Markdown Styles for Review Panel */
+.prose {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--text-main);
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+.prose h3 {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-top: 1.75rem;
+}
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+.prose ul {
+  list-style-type: disc;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.prose ol {
+  list-style-type: decimal;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.prose li {
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+  display: list-item;
+}
+.prose li strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+.prose code {
+  background-color: var(--code-bg);
+  color: var(--color-primary-400);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.375rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.825rem;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.dark .prose code {
+  color: var(--color-primary-300);
+}
+.prose pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  color: var(--text-main);
+  font-size: 0.825rem;
+}
+.prose strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Specific Markdown Headings Colors with support for both light and dark mode */
+.prose .error-heading {
+  color: #dc2626; /* red-600 */
+}
+.dark .prose .error-heading {
+  color: #f87171; /* red-400 */
+}
+
+.prose .best-practice-heading {
+  color: #2563eb; /* blue-600 */
+}
+.dark .prose .best-practice-heading {
+  color: #60a5fa; /* blue-400 */
+}
+
+.prose .optimization-heading {
+  color: #d97706; /* amber-600 */
+}
+.dark .prose .optimization-heading {
+  color: #fbbf24; /* amber-400 */
+}
+
+.prose .readability-heading {
+  color: #7c3aed; /* violet-600 */
+}
+.dark .prose .readability-heading {
+  color: #c084fc; /* purple-400 */
+}
+
+.prose .security-heading {
+  color: #059669; /* emerald-600 */
+}
+.dark .prose .security-heading {
+  color: #34d399; /* emerald-400 */
+}
